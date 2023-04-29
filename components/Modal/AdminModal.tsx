@@ -1,17 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import Modal from "./Modal";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
-import { toast } from "react-hot-toast";
+import useAdminModal from "../hooks/useAdminModal";
+import Modal from "./Modal";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 const AdminModal = () => {
   const router = useRouter();
-  const [login, setLogin] = useState(true);
+  const adminModal = useAdminModal();
   const [isloading, setIsloading] = useState(false);
   const {
     register,
@@ -32,7 +33,9 @@ const AdminModal = () => {
     })
       .then((callback) => {
         if (callback?.ok) {
+          router.refresh();
           toast.success("Login");
+          adminModal.onClose();
         }
         if (callback?.error) {
           toast.error(callback.error);
@@ -40,17 +43,13 @@ const AdminModal = () => {
         }
       })
       .finally(() => {
-        router.refresh();
         setIsloading(false);
       });
   };
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading
-        title="welcome to Kyouka"
-        subtitle="Create an account"
-      />
+      <Heading title="welcome to Kyouka" subtitle="Create an account" />
       <Input
         id="email"
         type="email"
@@ -77,8 +76,8 @@ const AdminModal = () => {
       body={bodyContent}
       actionLabel="Login"
       title="Admin"
-      isOpen={login}
-      onClose={() => setLogin(false)}
+      isOpen={adminModal.isOpen}
+      onClose={adminModal.onClose}
       onSubmit={handleSubmit(onSubmit)}
     />
   );

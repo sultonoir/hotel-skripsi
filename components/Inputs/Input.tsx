@@ -51,15 +51,14 @@ const Input: React.FC<InputProps> = ({
           p-4
           pt-6 
           font-light 
-          bg-white
-          text-neutral-800
+          bg-background
           rounded-md
           outline-none
           transition
-          disabled:opacity-70
+          disabled:bg-secondary
           disabled:cursor-not-allowed
           ${formatPrice ? "pl-9" : "pl-4"}
-          ${errors[id] ? "border-rose-500" : "border-neutral-300"}
+          ${errors[id] ? "border-rose-500" : ""}
           ${errors[id] ? "focus:border-rose-500" : ""}
         `}
       />

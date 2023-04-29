@@ -2,7 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import LoginModal from "@/components/Modal/LoginModal";
 import RegisterModal from "@/components/Modal/RegisterModal";
-import getCurrentUser from "./actions/getCurrentUser";
+import getCurrentUser from "../components/actions/getCurrentUser";
 import ToasterProvider from "@/providers/ToasterProvider";
 import AdminModal from "@/components/Modal/AdminModal";
 
@@ -25,7 +25,6 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       />
       <body className={inter.className}>
         <LoginModal />
-        <AdminModal />
         <RegisterModal />
         <div>{children}</div>
         <ToasterProvider />

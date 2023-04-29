@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Image from "next/image"
 
 const Logo = () => {
   return (
     <div className="avatar">
-      <div className="w-10">
+      <div className="w-7">
         <Image
           width={40}
           height={40}
@@ -13,7 +13,7 @@ const Logo = () => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

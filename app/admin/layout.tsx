@@ -1,14 +1,18 @@
 import React, { ReactNode } from "react";
-import AdminNavbar from "./AdminNavbar";
+import getAdmin from "../../components/actions/getAdmin";
+import AdminModal from "@/components/Modal/AdminModal";
+import AdminNavbar from "@/components/admin/AdminNavbar";
 
 type Props = {
   children: React.ReactNode;
 };
 
-const layoutHome = ({ children }: Props) => {
+const layoutHome = async ({ children }: Props) => {
+  const currentAdmin = await getAdmin();
   return (
     <div>
-      <AdminNavbar />
+      <AdminModal />
+      <AdminNavbar currentAdmin={currentAdmin} />
       <div>{children}</div>
     </div>
   );

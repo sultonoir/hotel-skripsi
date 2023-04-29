@@ -31,3 +31,21 @@ export type safeAdmin = Omit<
   updatedAt: string;
   emailVerified: string | null;
 };
+
+export interface NavItem {
+  title: string;
+  href?: string;
+  disabled?: boolean;
+  external?: boolean;
+}
+
+export const adminNav = [
+  {
+    title: "Home",
+    href: "/admin",
+  },
+  {
+    title: "Reservation",
+    href: "/admin/Reservation",
+  },
+];

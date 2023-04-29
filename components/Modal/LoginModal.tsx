@@ -6,7 +6,6 @@ import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import useLoginModal from "../hooks/useLoginModal";
 import useRegisterModal from "../hooks/useRegisterModal";
-
 import Modal from "./Modal";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -34,24 +33,20 @@ const LoginModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsloading(true);
-    signIn("credentials", {
+    signIn("user", {
       ...data,
       redirect: false,
-    })
-      .then((callback) => {
-        if (callback?.ok) {
-          toast.success("Login");
-          loginmodal.onClose();
-        }
-        if (callback?.error) {
-          toast.error(callback.error);
-          setIsloading(false);
-        }
-      })
-      .finally(() => {
+    }).then((callback) => {
+      if (callback?.ok) {
+        toast.success("Login");
         router.refresh();
+        loginmodal.onClose();
+      }
+      if (callback?.error) {
+        toast.error(callback.error);
         setIsloading(false);
-      });
+      }
+    });
   };
 
   const toggle = useCallback(() => {

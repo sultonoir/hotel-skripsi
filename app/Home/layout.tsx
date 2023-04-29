@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const layoutAdmin = ({ children }: Props) => {
+const layouHome = ({ children }: Props) => {
   return (
     <div>
       <Navbar />
@@ -14,4 +14,4 @@ const layoutAdmin = ({ children }: Props) => {
   );
 };
 
-export default layoutAdmin;
+export default layouHome;

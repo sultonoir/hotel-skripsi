@@ -21,20 +21,19 @@ const Button = ({
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       className={`
         relative
+        disabled:opacity-70
+        disabled:cursor-not-allowed
         rounded-lg
         hover:opacity-80
         transition
         w-full
-        btn
-        hover:bg-info/90
-        hover:border-info/90
-        ${disabled ? "btn loading" : ""}
         ${
           outline
             ? "bg-white border-black text-black"
-            : "bg-info border-info text-white"
+            : "bg-info border-info  text-foreground"
         }
         ${
           small

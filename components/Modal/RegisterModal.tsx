@@ -5,17 +5,18 @@ import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import useLoginModal from "../hooks/useLoginModal";
 import useRegisterModal from "../hooks/useRegisterModal";
-import toast from "react-hot-toast";
 import Modal from "./Modal";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useCallback } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 
 const RegisterModal = () => {
+  const router = useRouter();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isloading, setIsloading] = useState(false);
@@ -36,8 +37,8 @@ const RegisterModal = () => {
     axios
       .post("/api/register", data)
       .then((res) => {
-        toast.success("Account registered");
         registerModal.onClose();
+        toast.success("Akun dibuat");
         loginModal.onOpen();
       })
       .catch((err) => {

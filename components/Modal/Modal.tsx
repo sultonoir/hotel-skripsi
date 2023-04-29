@@ -80,8 +80,8 @@ const Modal: React.FC<ModalProps> = ({
           z-50 
           outline-none 
           focus:outline-none
-          bg-neutral-800/70
-          
+          bg-secondary/70
+          backdrop-blur-sm
         "
       >
         <div
@@ -89,6 +89,7 @@ const Modal: React.FC<ModalProps> = ({
           relative 
           w-full
           max-w-sm
+          
           mx-auto 
           h-screen
           lg:h-auto
@@ -119,7 +120,7 @@ const Modal: React.FC<ModalProps> = ({
               flex 
               flex-col 
               w-full 
-              bg-white
+              bg-background
               outline-none 
               focus:outline-none
               p-2
@@ -146,15 +147,13 @@ const Modal: React.FC<ModalProps> = ({
                     transition
                     absolute
                     left-9
+                    text-foreground
                   "
                   onClick={handleClose}
                 >
-                  <IoMdClose
-                    size={18}
-                    color="black"
-                  />
+                  <IoMdClose size={18} />
                 </button>
-                <div className="text-lg font-semibold text-neutral-800">
+                <div className="text-lg font-semibold text-foreground">
                   {title}
                 </div>
               </div>
@@ -165,11 +164,7 @@ const Modal: React.FC<ModalProps> = ({
               <div className="flex flex-col gap-2 px-6 py-2">
                 <div
                   className="
-                    flex 
-                    flex-row 
-                    items-center 
-                    gap-4 
-                    w-full
+                  flex flex-row gap-4
                   "
                 >
                   {secondaryAction && secondaryActionLabel && (
