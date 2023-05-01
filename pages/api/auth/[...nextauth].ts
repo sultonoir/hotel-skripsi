@@ -18,71 +18,54 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
-      id: "user",
       name: "credentials",
       credentials: {
         email: { label: "email", type: "text" },
         password: { label: "password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
 
         const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
+          where: { email: credentials.email },
+        });
+        const admin = await prisma.admin.findUnique({
+          where: { email: credentials.email },
         });
 
-        if (!user || !user?.hashedPassword) {
-          throw new Error("user tidak ditemukan");
+        if (user) {
+          if (!user || !user?.hashedPassword) {
+            throw new Error("user tidak ditemukan");
+          }
+          const isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            user.hashedPassword
+          );
+
+          if (isPasswordValid) {
+            return Promise.resolve(user);
+          } else {
+            return Promise.reject(new Error("Password salah"));
+          }
+        } else if (admin) {
+          if (!admin || !admin?.hashedPassword) {
+            throw new Error("admin tidak ditemukan");
+          }
+          const isPasswordValid = await bcrypt.compare(
+            credentials.password,
+            admin.hashedPassword
+          );
+
+          if (isPasswordValid) {
+            return Promise.resolve(admin);
+          } else {
+            return Promise.reject(new Error("Password salah"));
+          }
+        } else {
+          return Promise.reject(new Error("User tidak ditemukan"));
         }
-
-        const isCorrectPassword = await bcrypt.compare(
-          credentials.password,
-          user.hashedPassword
-        );
-
-        if (!isCorrectPassword) {
-          throw new Error("password salah");
-        }
-
-        return user;
-      },
-    }),
-    CredentialsProvider({
-      id: "admin",
-      name: "credentials",
-      credentials: {
-        email: { label: "email", type: "text" },
-        password: { label: "password", type: "password" },
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
-        }
-
-        const user = await prisma.admin.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
-
-        if (!user || !user?.hashedPassword) {
-          throw new Error("admin tidak ditemukan");
-        }
-
-        const isCorrectPassword = await bcrypt.compare(
-          credentials.password,
-          user.hashedPassword
-        );
-
-        if (!isCorrectPassword) {
-          throw new Error("password salah");
-        }
-
-        return user;
       },
     }),
   ],

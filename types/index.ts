@@ -2,6 +2,19 @@ import { Listing, Reservation, User, Admin } from "@prisma/client";
 
 export type SafeListing = Omit<Listing, "createdAt"> & {
   createdAt: string;
+  imageSrc: SafeImage[];
+};
+
+export type SafeImage = {
+  id: string;
+  img: string;
+  listingId: string;
+};
+
+export type SafeFavorite = {
+  id: string;
+  userId: string;
+  listingId: string;
 };
 
 export type SafeReservation = Omit<
@@ -12,6 +25,8 @@ export type SafeReservation = Omit<
   startDate: string;
   endDate: string;
   listing: SafeListing;
+  admin: safeAdmin;
+  user: SafeUser;
 };
 
 export type SafeUser = Omit<
@@ -21,6 +36,7 @@ export type SafeUser = Omit<
   createdAt: string;
   updatedAt: string;
   emailVerified: string | null;
+  favorite: SafeFavorite[];
 };
 
 export type safeAdmin = Omit<
@@ -47,5 +63,16 @@ export const adminNav = [
   {
     title: "Reservation",
     href: "/admin/Reservation",
+  },
+];
+
+export const NavItem = [
+  {
+    title: "Home",
+    href: "/Home",
+  },
+  {
+    title: "Admin",
+    href: "/admin",
   },
 ];

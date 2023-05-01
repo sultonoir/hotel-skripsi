@@ -1,8 +1,8 @@
 "use client";
 
+import { safeAdmin } from "@/types";
 import AvatarCom from "../AvatarCom";
 import useAdminModal from "../hooks/useAdminModal";
-import { safeAdmin } from "@/types/nav";
 import { Menu, Transition } from "@headlessui/react";
 import { signOut } from "next-auth/react";
 import { Fragment } from "react";
@@ -14,11 +14,17 @@ interface AdminMenuProps {
 const AdminMenu: React.FC<AdminMenuProps> = ({ currentAdmin }) => {
   const adminModal = useAdminModal();
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu
+      as="div"
+      className="relative inline-block text-left"
+    >
       <div>
         <Menu.Button className="">
           <label className="btn btn-ghost btn-circle avatar">
-            <AvatarCom src={currentAdmin?.image} alt="profile" />
+            <AvatarCom
+              src={currentAdmin?.image}
+              alt="profile"
+            />
           </label>
         </Menu.Button>
       </div>

@@ -1,40 +1,43 @@
+import getAdmin from "@/components/actions/getAdmin";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-import prisma from "@/app/libs/prisma";
-import getCurrentUser from "@/components/actions/getCurrentUser";
-
 export async function POST(request: Request) {
-  const currentUser = await getCurrentUser();
+  const currnetAdmin = await getAdmin();
 
-  if (!currentUser) {
+  if (!currnetAdmin) {
     return NextResponse.error();
   }
 
   const body = await request.json();
   const {
-    title,
-    description,
-    imageSrc,
+    rooms,
+    kingSize,
+    fullSize,
+    favorite,
     category,
-    roomCount,
-    bathroomCount,
     guestCount,
-    location,
     price,
+    img,
+    fasilitas,
   } = body;
 
   const listing = await prisma.listing.create({
     data: {
-      title,
-      description,
-      imageSrc,
       category,
-      roomCount,
-      bathroomCount,
+      rooms,
+      kingSize,
+      fullSize,
+      favorite,
       guestCount,
-      locationValue: location.value,
       price: parseInt(price, 10),
-      userId: currentUser.id,
+      adminId: currnetAdmin.id,
+      imageSrc: {
+        create: img.map((url: string) => ({ img: url })),
+      },
+      fasilitas: {
+        create: fasilitas.map((item: string) => ({ label: item })),
+      },
     },
   });
 

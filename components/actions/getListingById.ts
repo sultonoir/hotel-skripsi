@@ -1,4 +1,4 @@
-import prisma from "@/app/libs/prisma";
+import prisma from "@/lib/prisma";
 
 interface Iparams {
   listingId?: string;
@@ -12,9 +12,14 @@ export default async function getLIstingById(params: Iparams) {
         id: listingId,
       },
       include: {
-        user: true,
+        admin: true,
+        imageSrc: true,
       },
     });
+
+    if (!listing) {
+      return null;
+    }
 
     if (!listing) {
       return null;
@@ -23,12 +28,14 @@ export default async function getLIstingById(params: Iparams) {
     return {
       ...listing,
       createdAt: listing.createdAt.toISOString(),
-      user: {
-        ...listing.user,
-        createdAt: listing.user.createdAt.toISOString(),
-        updatedAt: listing.user.updatedAt.toISOString(),
-        emailVerified: listing.user.emailVerified?.toISOString() || null,
-      },
+      admin: listing.admin
+        ? {
+            ...listing.admin,
+            createdAt: listing.admin.createdAt.toISOString(),
+            updatedAt: listing.admin.updatedAt.toISOString(),
+            emailVerified: listing.admin.emailVerified?.toISOString() || null,
+          }
+        : null,
     };
   } catch (error: any) {
     throw new error(error);

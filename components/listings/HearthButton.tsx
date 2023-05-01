@@ -1,10 +1,11 @@
 "use client";
+import { SafeUser } from "@/types";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { SafeUser } from "@/types/nav";
+import useFavorite from "../hooks/useFavorite";
 
 type Props = {
   listingId: string;
-  currentUser: SafeUser | null | undefined;
+  currentUser: SafeUser | null;
 };
 
 const HearthButton = ({ listingId, currentUser }: Props) => {

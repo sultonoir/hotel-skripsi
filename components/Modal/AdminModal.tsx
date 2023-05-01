@@ -27,7 +27,7 @@ const AdminModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsloading(true);
-    signIn("admin", {
+    signIn("credentials", {
       ...data,
       redirect: false,
     })
@@ -49,7 +49,10 @@ const AdminModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
-      <Heading title="welcome to Kyouka" subtitle="Create an account" />
+      <Heading
+        title="welcome to Kyouka"
+        subtitle="Create an account"
+      />
       <Input
         id="email"
         type="email"

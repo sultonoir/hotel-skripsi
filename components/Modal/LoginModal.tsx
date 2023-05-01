@@ -33,7 +33,7 @@ const LoginModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsloading(true);
-    signIn("user", {
+    signIn("credentials", {
       ...data,
       redirect: false,
     }).then((callback) => {
@@ -41,6 +41,7 @@ const LoginModal = () => {
         toast.success("Login");
         router.refresh();
         loginmodal.onClose();
+        setIsloading(false);
       }
       if (callback?.error) {
         toast.error(callback.error);

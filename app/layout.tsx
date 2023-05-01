@@ -5,6 +5,9 @@ import RegisterModal from "@/components/Modal/RegisterModal";
 import getCurrentUser from "../components/actions/getCurrentUser";
 import ToasterProvider from "@/providers/ToasterProvider";
 import AdminModal from "@/components/Modal/AdminModal";
+import Navbar from "@/components/Navbar/Navbar";
+import RentModal from "@/components/Modal/RentModal";
+import getAdmin from "@/components/actions/getAdmin";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +18,7 @@ export const metadata = {
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const currentUser = await getCurrentUser();
+  const currentAdmin = await getAdmin();
   return (
     <html lang="en">
       <link
@@ -24,9 +28,15 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
         sizes="16x16"
       />
       <body className={inter.className}>
+        <Navbar
+          currentUser={currentUser}
+          currentAdmin={currentAdmin}
+        />
+        <AdminModal />
         <LoginModal />
         <RegisterModal />
-        <div>{children}</div>
+        <RentModal />
+        <div className="pt-20">{children}</div>
         <ToasterProvider />
       </body>
     </html>

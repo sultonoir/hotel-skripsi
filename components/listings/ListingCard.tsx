@@ -4,18 +4,25 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from "date-fns";
-import { SafeListing, SafeReservation, SafeUser } from "@/types/nav";
 import HearthButton from "./HearthButton";
 import Button from "../Button";
+import {
+  SafeImage,
+  SafeListing,
+  SafeReservation,
+  SafeUser,
+  safeAdmin,
+} from "@/types";
 
 interface ListingCardProps {
-  data: any;
+  data: SafeListing;
   reservation?: SafeReservation;
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
-  currentUser?: SafeUser | null;
+  currentUser: SafeUser | null;
+  currentAdmin?: safeAdmin | null;
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({
@@ -75,7 +82,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             rounded-xl
           "
         >
-          {data.imageSrc.map((img: any) => (
+          {data.imageSrc.map((img: SafeImage) => (
             <Image
               fill
               className="
@@ -100,7 +107,10 @@ const ListingCard: React.FC<ListingCardProps> = ({
             right-3
           "
           >
-            {/* <HearthButton listingId={data.id} currentUser={currentUser} /> */}
+            <HearthButton
+              listingId={data.id}
+              currentUser={currentUser}
+            />
           </div>
         </div>
         <div className="font-light text-neutral-500">
