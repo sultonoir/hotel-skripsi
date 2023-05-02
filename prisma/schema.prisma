@@ -20,6 +20,7 @@ model User {
   accounts        Account[]
   reservations    Reservation[]
   favorite        Favorite[]
+  listing         Listing[]
   adminId         String?
   admin           Admin?      @relation(fields: [adminId], references: [id], onDelete: Cascade)
 
@@ -52,10 +53,13 @@ model Listing {
   guestCount      Int?
   price           Int
   reservations    Reservation[]
-  adminId         String
+  adminId         String?
   admin           Admin?     @relation(fields: [adminId], references: [id], onDelete: Cascade)
   favorite        Favorite[]
+  userId          String?
+  user            User?      @relation(fields: [userId],references: [id],onDelete: Cascade)
 
+  @@index([userId])
   @@index([adminId])
 }
 
@@ -69,7 +73,7 @@ model Reservation {
   user            User       @relation(fields: [userId], references: [id])
   listingId       String
   listing         Listing    @relation(fields: [listingId], references: [id])
-  adminId         String
+  adminId         String?
   admin           Admin?      @relation(fields: [adminId], references: [id], onDelete: Cascade)
 
   @@index([userId])

@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 
-import getCurrentUser from "@/components/actions/getCurrentUser";
-import prisma from "@/app/libs/prisma";
+import getcurrentAdmin from "@/components/actions/getCurrentUser";
+import prisma from "@/lib/prisma";
+import getAdmin from "@/components/actions/getAdmin";
 
 interface IParams {
   reservationId?: string;
@@ -11,9 +12,9 @@ export async function DELETE(
   request: Request,
   { params }: { params: IParams }
 ) {
-  const currentUser = await getCurrentUser();
+  const currentAdmin = await getAdmin();
 
-  if (!currentUser) {
+  if (!currentAdmin) {
     return NextResponse.error();
   }
 
@@ -26,7 +27,10 @@ export async function DELETE(
   const reservation = await prisma.reservation.deleteMany({
     where: {
       id: reservationId,
-      OR: [{ userId: currentUser.id }, { listing: { userId: currentUser.id } }],
+      OR: [
+        { adminId: currentAdmin.id },
+        { listing: { adminId: currentAdmin.id } },
+      ],
     },
   });
 

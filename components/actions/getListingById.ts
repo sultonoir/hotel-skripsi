@@ -14,6 +14,7 @@ export default async function getLIstingById(params: Iparams) {
       include: {
         admin: true,
         imageSrc: true,
+        fasilitas: true,
       },
     });
 

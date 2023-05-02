@@ -49,8 +49,10 @@ const ListingHead: React.FC<ListingHeadProps> = ({
               <SwiperSlide key={img.id}>
                 <Image
                   alt="image"
-                  width={1200}
-                  height={3100}
+                  fill
+                  sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
                   src={img.img}
                   key={img.id}
                   className="object-cover w-full"
@@ -58,16 +60,15 @@ const ListingHead: React.FC<ListingHeadProps> = ({
               </SwiperSlide>
             );
           })}
-
-          <div className="swiper-button-next hover:bg-secondary/75 absolute top-1/2 left-2  -translate-y-1/2 rounded-full z-10">
+          <div className="swiper-button-prev hover:bg-secondary/75 absolute top-1/2 -translate-y-1/2 left-2 rounded-full  z-10 cursor-pointer">
             <HiOutlineArrowLeft size={30} />
           </div>
-          <div className="swiper-button-prev hover:bg-secondary/75 absolute top-1/2 -translate-y-1/2 right-2 rounded-full  z-10">
+          <div className="swiper-button-next hover:bg-secondary/75 absolute top-1/2 right-2  -translate-y-1/2 rounded-full z-10 cursor-pointer">
             <HiOutlineArrowRight size={30} />
           </div>
         </Swiper>
 
-        <div className="absolute top-3 right-3 z-20">
+        <div className="absolute top-3 right-3 z-10">
           <HearthButton
             listingId={id}
             currentUser={currentUser}

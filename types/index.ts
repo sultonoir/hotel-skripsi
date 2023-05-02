@@ -1,8 +1,9 @@
-import { Listing, Reservation, User, Admin } from "@prisma/client";
+import { Listing, Reservation, User, Admin, Fasilitas } from "@prisma/client";
 
 export type SafeListing = Omit<Listing, "createdAt"> & {
   createdAt: string;
   imageSrc: SafeImage[];
+  fasilitas: Fasilitas[];
 };
 
 export type SafeImage = {
@@ -25,8 +26,8 @@ export type SafeReservation = Omit<
   startDate: string;
   endDate: string;
   listing: SafeListing;
-  admin: safeAdmin;
-  user: SafeUser;
+  user: User | null;
+  admin: Admin | null;
 };
 
 export type SafeUser = Omit<
@@ -74,5 +75,9 @@ export const NavItem = [
   {
     title: "Admin",
     href: "/admin",
+  },
+  {
+    title: "Reservations",
+    href: "/reservations",
   },
 ];

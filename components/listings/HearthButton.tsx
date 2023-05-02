@@ -5,7 +5,7 @@ import useFavorite from "../hooks/useFavorite";
 
 type Props = {
   listingId: string;
-  currentUser: SafeUser | null;
+  currentUser?: SafeUser | null;
 };
 
 const HearthButton = ({ listingId, currentUser }: Props) => {

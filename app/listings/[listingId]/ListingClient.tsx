@@ -1,21 +1,28 @@
 "use client";
 import { categories } from "@/components/Category";
 import Container from "@/components/Container";
+import useLoginModal from "@/components/hooks/useLoginModal";
 import ListingHead from "@/components/listings/ListingHead";
 import ListingInfo from "@/components/listings/ListingInfo";
-import {
-  SafeImage,
-  SafeListing,
-  SafeReservation,
-  SafeUser,
-  safeAdmin,
-} from "@/types";
-import React, { useMemo } from "react";
+import { SafeListing, SafeReservation, SafeUser } from "@/types";
+import axios from "axios";
+import { differenceInDays, eachDayOfInterval } from "date-fns";
+import { useRouter } from "next/navigation";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { toast } from "react-hot-toast";
+import { Range } from "react-date-range";
+import ListingReservation from "@/components/listings/ListingReservation";
+
+const initialDateRange = {
+  startDate: new Date(),
+  endDate: new Date(),
+  key: "selection",
+};
 
 interface ListingClientProps {
   listing: SafeListing;
   currentUser: SafeUser | null;
-  reservations?: SafeReservation;
+  reservations: SafeReservation[];
 }
 
 const ListingClient: React.FC<ListingClientProps> = ({
@@ -23,9 +30,69 @@ const ListingClient: React.FC<ListingClientProps> = ({
   currentUser,
   reservations,
 }) => {
+  const loginModal = useLoginModal();
+  const router = useRouter();
+
+  const disabledDates = useMemo(() => {
+    let dates: Date[] = [];
+    reservations.forEach((reservation: any) => {
+      const range = eachDayOfInterval({
+        start: new Date(reservation.startDate),
+        end: new Date(reservation.endDate),
+      });
+
+      dates = [...dates, ...range];
+    });
+
+    return dates;
+  }, [reservations]);
+
   const category = useMemo(() => {
     return categories.find((item) => item.label === listing.category);
   }, []);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(listing.price);
+  const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+
+  const onCreateReservation = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+    setIsLoading(true);
+
+    axios
+      .post("/api/reservations", {
+        totalPrice,
+        startDate: dateRange.startDate,
+        endDate: dateRange.endDate,
+        listingId: listing.id,
+      })
+      .then(() => {
+        toast.success("Listing reserved!");
+        setDateRange(initialDateRange);
+        router.push("/trips");
+      })
+      .catch(() => {
+        toast.error("Something went wrong.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [totalPrice, dateRange, listing?.id, router, currentUser, loginModal]);
+
+  useEffect(() => {
+    if (dateRange.startDate && dateRange.endDate) {
+      const dayCount = differenceInDays(dateRange.endDate, dateRange.startDate);
+
+      if (dayCount && listing.price) {
+        setTotalPrice(dayCount * listing.price);
+      } else {
+        setTotalPrice(listing.price);
+      }
+    }
+  }, [dateRange, listing.price]);
+
   return (
     <Container>
       <div className="max-w-screen-lg mx-auto">
@@ -44,7 +111,26 @@ const ListingClient: React.FC<ListingClientProps> = ({
               kingSize={listing.kingSize}
               fullSize={listing.fullSize}
               title={listing.category}
+              fasilitas={listing.fasilitas}
             />
+            <div
+              className="
+                order-first 
+                mb-10 
+                md:order-last 
+                md:col-span-3
+              "
+            >
+              <ListingReservation
+                price={listing.price}
+                totalPrice={totalPrice}
+                onChangeDate={(value) => setDateRange(value)}
+                dateRange={dateRange}
+                onSubmit={onCreateReservation}
+                disabled={isLoading}
+                disabledDate={disabledDates}
+              />
+            </div>
           </div>
         </div>
       </div>
