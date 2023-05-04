@@ -29,16 +29,19 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
 
       try {
         let request;
+        let toastMessage;
 
         if (hasFavorited) {
           request = () => axios.delete(`/api/favorites/${listingId}`);
+          toastMessage = "Dihapus dari favorite";
         } else {
           request = () => axios.post(`/api/favorites/${listingId}`);
+          toastMessage = "Ditambahkan ke favorite";
         }
 
         await request();
         router.refresh();
-        toast.success("Success");
+        toast.success(toastMessage);
       } catch (error) {
         console.log(error);
         toast.error("Something went wrong.");

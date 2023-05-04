@@ -1,5 +1,5 @@
-import getCurrentUser from "@/components/actions/getCurrentUser";
-import prisma from "@/app/libs/prisma";
+import getAdmin from "@/components/actions/getAdmin";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 interface IParams {
@@ -10,8 +10,8 @@ export async function DELETE(
   request: Request,
   { params }: { params: IParams }
 ) {
-  const currentUser = await getCurrentUser();
-  if (!currentUser) {
+  const currentAdmin = await getAdmin();
+  if (!currentAdmin) {
     return NextResponse.error();
   }
 
@@ -24,7 +24,7 @@ export async function DELETE(
   const listing = await prisma.listing.deleteMany({
     where: {
       id: listingId,
-      userId: currentUser.id,
+      adminId: currentAdmin.id,
     },
   });
 

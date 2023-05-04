@@ -70,9 +70,9 @@ model Reservation {
   totalPrice      Int
   createdAt       DateTime   @default(now())
   userId          String
-  user            User       @relation(fields: [userId], references: [id])
+  user            User       @relation(fields: [userId], references: [id],onDelete: Cascade)
   listingId       String
-  listing         Listing    @relation(fields: [listingId], references: [id])
+  listing         Listing    @relation(fields: [listingId], references: [id],onDelete: Cascade)
   adminId         String?
   admin           Admin?      @relation(fields: [adminId], references: [id], onDelete: Cascade)
 
@@ -120,7 +120,7 @@ model Favorite{
   id                 String   @id @default(uuid())
   userId             String
   user               User     @relation(fields: [userId],references: [id],onDelete: Cascade)
-  listing            Listing @relation(fields: [listingId], references: [id])
+  listing            Listing @relation(fields: [listingId], references: [id],onDelete: Cascade)
   listingId          String
 
   @@index([userId])

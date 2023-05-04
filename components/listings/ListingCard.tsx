@@ -23,7 +23,7 @@ interface ListingCardProps {
   actionId?: string;
   currentUser?: SafeUser | null;
   currentAdmin?: safeAdmin | null;
-  name: string | null | undefined;
+  name?: string | null | undefined;
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({

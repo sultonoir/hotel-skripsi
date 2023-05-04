@@ -1,5 +1,6 @@
 import React from "react";
 import { IconType } from "react-icons";
+import { BiLoaderAlt } from "react-icons/bi";
 
 type Props = {
   label?: string;
@@ -21,7 +22,6 @@ const Button = ({
   return (
     <button
       onClick={onClick}
-      disabled={disabled}
       className={`
         relative
         disabled:opacity-70
@@ -42,8 +42,21 @@ const Button = ({
         }
         `}
     >
-      {Icon && <Icon size={24} className="absolute left-4 top-3" />}
-      {label}
+      <span className="flex flex-row gap-2 items-center justify-center">
+        {disabled && (
+          <BiLoaderAlt
+            size={24}
+            className="mr-2 animate-spin"
+          />
+        )}
+        {Icon && (
+          <Icon
+            size={24}
+            className="absolute left-4 top-3"
+          />
+        )}
+        {label}
+      </span>
     </button>
   );
 };

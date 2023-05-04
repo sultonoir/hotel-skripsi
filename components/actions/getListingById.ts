@@ -22,10 +22,6 @@ export default async function getLIstingById(params: Iparams) {
       return null;
     }
 
-    if (!listing) {
-      return null;
-    }
-
     return {
       ...listing,
       createdAt: listing.createdAt.toISOString(),

@@ -112,12 +112,15 @@ const RentModal = () => {
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
-        title="Which the best describes your place ? "
-        subtitle="pick a category"
+        title="Pilih kategory "
+        subtitle="category yang menggambarkan kamar anda"
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
         {categories.map((item) => (
-          <div key={item.label} className="col-span-1">
+          <div
+            key={item.label}
+            className="col-span-1"
+          >
             <CategoryInput
               onClick={(category) => setCustomValue("category", category)}
               selected={category === item.label}
@@ -133,18 +136,18 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Share your basics about your place"
-          subtitle="What amenities do you have ? "
+          title="Detail Ruangan"
+          subtitle="Fasilitas utama apa saja yang anda punya"
         />
         <Counter
           title="Guest"
-          subtitle="Berapa banyak tamu ?"
+          subtitle="Untuk berapa banyak tamu ?"
           value={guestCount}
           onChange={(value) => setCustomValue("guestCount", value)}
         />
         <Counter
           title="Rooms"
-          subtitle="Berapa banyak ruangan ?"
+          subtitle="Kamar no berapa"
           value={rooms}
           onChange={(value) => setCustomValue("rooms", value)}
         />
@@ -168,8 +171,8 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Add Photo of your Place"
-          subtitle="Show guests what your place looks like!"
+          title="Tambahkan foto"
+          subtitle="Tunjukan pada tamu tentang tempat anda"
         />
         <ImageUpload
           value={img}
@@ -183,12 +186,15 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Add Photo of your Place"
-          subtitle="Show guests what your place looks like!"
+          title="Fasilitas"
+          subtitle="Fasilitas apa saja yang dalam category ini"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
           {facility.map((item) => (
-            <div key={item.label} className="col-span-1 ">
+            <div
+              key={item.label}
+              className="col-span-1 "
+            >
               <Fasilitas
                 icon={item.icon}
                 label={item.label}
@@ -206,8 +212,8 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Now, set your price"
-          subtitle="How much do you charge per night ? "
+          title="Sekarang, tetapkan harga Anda"
+          subtitle="Berapa biaya yang Anda kenakan per malam?"
         />
         <Input
           id="price"

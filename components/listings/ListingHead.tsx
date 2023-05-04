@@ -24,6 +24,10 @@ const ListingHead: React.FC<ListingHeadProps> = ({
   id,
   currentUser,
 }) => {
+  function cn(...classes: string[]) {
+    return classes.filter(Boolean).join(" ");
+  }
+  const [isLoading, setLoading] = useState(true);
   return (
     <>
       <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
@@ -50,12 +54,17 @@ const ListingHead: React.FC<ListingHeadProps> = ({
                 <Image
                   alt="image"
                   fill
-                  sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
+                  priority
+                  sizes="100vw"
                   src={img.img}
                   key={img.id}
-                  className="object-cover w-full"
+                  className={cn(
+                    "duration-700 ease-in-out",
+                    isLoading
+                      ? "grayscale blur-2xl scale-110"
+                      : "grayscale-0 blur-0 scale-100"
+                  )}
+                  onLoadingComplete={() => setLoading(false)}
                 />
               </SwiperSlide>
             );

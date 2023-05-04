@@ -4,16 +4,25 @@ interface IParams {
   listingId?: string;
   adminId?: string;
   authorId?: string;
+  userId?: string;
 }
 
 export default async function getReservations(params: IParams) {
   try {
-    const { listingId, adminId, authorId } = params;
+    const { listingId, adminId, authorId, userId } = params;
 
     const query: any = {};
 
     if (listingId) {
       query.listingId = listingId;
+    }
+
+    if (userId) {
+      query.userId = userId;
+    }
+
+    if (authorId) {
+      query.listing = { userId: authorId };
     }
 
     if (adminId) {
