@@ -2,14 +2,20 @@ import { NextResponse } from "next/server";
 
 import prisma from "@/lib/prisma";
 import getCurrentUser from "@/components/actions/getCurrentUser";
+import getAdmin from "@/components/actions/getAdmin";
 
 export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
+  const currentAdmin = await getAdmin();
 
   if (!currentUser) {
     return NextResponse.error();
   }
 
+  if (!currentAdmin) {
+    return NextResponse.error();
+  }
+  // kudu aya batas waktu cancel
   const body = await request.json();
   const { listingId, startDate, endDate, totalPrice } = body;
 
@@ -25,14 +31,21 @@ export async function POST(request: Request) {
       data: {
         reservations: {
           create: {
-            user: {
-              connect: {
-                id: currentUser.id,
-              },
-            },
+            userId: currentUser.id,
             startDate: new Date(startDate),
             endDate: new Date(endDate),
             totalPrice: totalPrice,
+          },
+        },
+        notification: {
+          create: {
+            userId: currentUser.id,
+            adminId: currentAdmin.id,
+          },
+        },
+        admin: {
+          update: {
+            hasNotification: true,
           },
         },
       },

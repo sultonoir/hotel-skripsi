@@ -1,12 +1,19 @@
 "use client";
 
-import { NavItem, SafeUser, safeAdmin } from "@/types";
+import {
+  NavItem,
+  SafeAdminNotif,
+  SafeListing,
+  SafeUser,
+  safeAdmin,
+} from "@/types";
 import Container from "../Container";
 import Logo from "./Logo";
 import UserMenu from "./UserMenu";
 import AdminMenu from "../admin/AdminMenu";
 import useLoginModal from "../hooks/useLoginModal";
 import { MainNav } from "../main-nav";
+import AdminNavbar from "../admin/AdminNavbar";
 
 interface NavbarProps {
   currentUser: SafeUser | null;
@@ -24,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, currentAdmin }) => {
               <MainNav items={NavItem} />
             </div>
             {currentUser && <UserMenu currentUser={currentUser} />}
-            {currentAdmin && <AdminMenu currentAdmin={currentAdmin} />}
+            {currentAdmin && <AdminNavbar currentAdmin={currentAdmin} />}
             {!currentUser && !currentAdmin && (
               <button
                 onClick={loginModal.onOpen}

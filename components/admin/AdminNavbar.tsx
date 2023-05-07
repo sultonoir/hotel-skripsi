@@ -1,10 +1,8 @@
 "use client";
 
 import AdminMenu from "@/components/admin/AdminMenu";
-import { MainNav } from "../main-nav";
-import { adminNav, safeAdmin } from "@/types";
-import Container from "../Container";
-import AvatarCom from "../AvatarCom";
+import { SafeAdminNotif, SafeListing, safeAdmin } from "@/types";
+import AdminNotication from "./AdminNotification";
 
 interface AdminNavbarProps {
   currentAdmin: safeAdmin | null;
@@ -12,18 +10,9 @@ interface AdminNavbarProps {
 
 const AdminNavbar = ({ currentAdmin }: AdminNavbarProps) => {
   return (
-    <div className="fixed w-full bg-white z-10 shadow-sm">
-      <div className="p-2 border-b-[1px]">
-        <Container>
-          <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
-            <AvatarCom
-              alt="logo"
-              src={`./logo.svg`}
-            />
-            <AdminMenu currentAdmin={currentAdmin} />
-          </div>
-        </Container>
-      </div>
+    <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
+      <AdminNotication currentAdmin={currentAdmin} />
+      <AdminMenu currentAdmin={currentAdmin} />
     </div>
   );
 };

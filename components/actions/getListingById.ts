@@ -15,6 +15,7 @@ export default async function getLIstingById(params: Iparams) {
         admin: true,
         imageSrc: true,
         fasilitas: true,
+        user: true,
       },
     });
 
