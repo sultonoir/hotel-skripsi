@@ -6,20 +6,15 @@ import getAdmin from "@/components/actions/getAdmin";
 
 export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
-  const currentAdmin = await getAdmin();
 
   if (!currentUser) {
     return NextResponse.error();
   }
-
-  if (!currentAdmin) {
-    return NextResponse.error();
-  }
   // kudu aya batas waktu cancel
   const body = await request.json();
-  const { listingId, startDate, endDate, totalPrice } = body;
+  const { listingId, startDate, endDate, totalPrice, status } = body;
 
-  if (!listingId || !startDate || !endDate || !totalPrice) {
+  if (!listingId || !startDate || !endDate || !totalPrice || !status) {
     return NextResponse.error();
   }
 
@@ -40,7 +35,7 @@ export async function POST(request: Request) {
         notification: {
           create: {
             userId: currentUser.id,
-            adminId: currentAdmin.id,
+            adminId: currentUser.adminId,
           },
         },
         admin: {

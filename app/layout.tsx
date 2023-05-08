@@ -8,7 +8,6 @@ import AdminModal from "@/components/Modal/AdminModal";
 import Navbar from "@/components/Navbar/Navbar";
 import RentModal from "@/components/Modal/RentModal";
 import getAdmin from "@/components/actions/getAdmin";
-import getNotification from "@/components/actions/getNotification";
 
 const inter = Inter({ subsets: ["latin"] });
 

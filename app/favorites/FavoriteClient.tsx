@@ -2,7 +2,7 @@
 
 import Container from "@/components/Container";
 import ListingCard from "@/components/listings/ListingCard";
-import { SafeListing, SafeUser } from "@/types";
+import { SafeUser, SafeFav, SafeListing } from "@/types";
 
 interface FavoritesClientProps {
   currentUser: SafeUser | null;
@@ -15,8 +15,8 @@ const favoritesClient: React.FC<FavoritesClientProps> = ({
 }) => {
   return (
     <Container>
-      <div className="mt-10 grid grid-cols-1 md:fridco2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-        {listings.map((listing) => (
+      <div className="mt-10 grid grid-cols-1 md:fridco2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-5">
+        {listings.map((listing: any) => (
           <ListingCard
             currentUser={currentUser}
             key={listing.id}

@@ -4,26 +4,22 @@ import getFavorites from "@/components/actions/getFavorites";
 import FavoritesClient from "./FavoriteClient";
 
 const page = async () => {
-  const listings = await getFavorites();
+  const favorites = await getFavorites();
   const currentUser = await getCurrentUser();
 
-  const [SafeListing] = listings.map((listing) => ({
-    ...listing,
-  }));
-
-  if (SafeListing.favorite.length === 0) {
-    return (
-      <EmptyState
-        title="No favorite found"
-        subtitle="Look like you have no favorite listings"
-      />
-    );
+  if (favorites.length === 0) {
+    <EmptyState
+      title="Tidak ada favorite"
+      subtitle="Buat favorite terlebih dahulu"
+    />;
   }
+
+  const safelistings = favorites.map((fav) => fav.listing);
 
   return (
     <FavoritesClient
       currentUser={currentUser}
-      listings={listings}
+      listings={safelistings}
     />
   );
 };

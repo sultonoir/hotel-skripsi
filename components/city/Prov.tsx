@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { FormatRegional } from "./useRegional";
-import City from "./City";
+import City from "./CountrySelect";
 
 const Prov = () => {
   const [lok, setLok] = useState<FormatRegional>();

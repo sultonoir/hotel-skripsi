@@ -67,6 +67,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,
         listingId: listing.id,
+        status: "pending",
       })
       .then(() => {
         toast.success("Listing reserved!");
@@ -105,12 +106,13 @@ const ListingClient: React.FC<ListingClientProps> = ({
           />
           <div className="grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6">
             <ListingInfo
-              rooms={listing.rooms}
+              location={listing.location}
+              description={listing.description}
               category={category}
-              guestCount={listing.guestCount}
-              kingSize={listing.kingSize}
-              fullSize={listing.fullSize}
-              title={listing.category}
+              adult={listing.adult}
+              kids={listing.kids}
+              children={listing.children}
+              title={listing.title}
               fasilitas={listing.fasilitas}
             />
             <div

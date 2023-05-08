@@ -1,46 +1,124 @@
 "use client";
-
+import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
+import {
+  GiBarn,
+  GiBoatFishing,
+  GiCactus,
+  GiCastle,
+  GiCaveEntrance,
+  GiForestCamp,
+  GiIsland,
+  GiWindmill,
+} from "react-icons/gi";
+import { FaSkiing } from "react-icons/fa";
+import { BsSnow } from "react-icons/bs";
+import { IoDiamond } from "react-icons/io5";
+import { MdOutlineVilla } from "react-icons/md";
 import { usePathname, useSearchParams } from "next/navigation";
+import Container from "./Container";
+import CategoryBox from "./CategoryBox";
 
 export const categories = [
   {
-    label: "Deluxe Room",
-    description:
-      "Nikmati kenyamanan dan kemewahan di deluxe room kami yang berukuran 40 m2. Kamar ini dilengkapi dengan pilihan kasur double atau twin yang nyaman, kulkas mini, televisi, AC, telepon, dan fasilitas lainnya. Anda juga bisa menikmati pemandangan kota yang indah dari jendela kamar. Pesan sekarang dan dapatkan diskon spesial untuk menginap di deluxe room kami!",
+    label: "Beach",
+    icon: TbBeach,
+    description: "This property is close to the beach!",
   },
   {
-    label: "Grand Deluxe Room",
-    description:
-      "Grand Deluxe Room adalah pilihan kamar hotel yang ideal untuk Anda yang ingin menikmati pengalaman menginap yang nyaman dan elegan. Dengan Grand Deluxe Room, Anda bisa menikmati tempat tidur yang nyaman dengan bantal memory foam. Anda juga bisa bekerja atau bersantai di meja kerja yang dilengkapi dengan lampu meja yang dapat disesuaikan. Anda bisa menonton TV HD 40 inci dengan berbagai saluran TV. Anda bisa menyeduh kopi atau teh dengan mesin espresso yang tersedia di kamar. Anda bisa memanjakan diri Anda di kamar mandi dengan bathtub dan shower hujan. Grand Deluxe Room memberikan Anda kesempatan untuk merasakan pemandangan taman yang indah dari balkon kamar. Pesan Grand Deluxe Room sekarang juga dan nikmati fasilitas dan layanan terbaik dari hotel pilihan Anda.",
+    label: "Windmills",
+    icon: GiWindmill,
+    description: "This property is has windmills!",
   },
   {
-    label: "Executive Grand Deluxe Room",
-    description:
-      "Executive Grand Deluxe Room adalah pilihan kamar hotel yang ideal untuk Anda yang ingin menikmati pengalaman menginap yang nyaman dan mewah. Dengan Executive Grand Deluxe Room, Anda bisa menikmati tempat tidur yang nyaman dengan pilihan bantal yang sesuai dengan selera Anda. Anda juga bisa bekerja atau bersantai di ruang kerja yang dilengkapi dengan meja dan Wi-Fi berkecepatan tinggi. Anda bisa menonton TV LED pintar dengan berbagai saluran TV. Anda bisa memanjakan diri Anda di kamar mandi dengan shower dan bathtub besar. Executive Grand Deluxe Room memberikan Anda kesempatan untuk merasakan pemandangan kota yang indah dari jendela kamar. Pesan Executive Grand Deluxe Room sekarang juga dan nikmati fasilitas dan layanan terbaik dari hotel pilihan Anda.",
+    label: "Modern",
+    icon: MdOutlineVilla,
+    description: "This property is modern!",
   },
   {
-    label: "Connecting Room",
-    description:
-      "Connecting Rooms adalah pilihan kamar hotel yang ideal untuk Anda yang ingin menikmati kenyamanan dan kebersamaan bersama keluarga atau teman. Dengan Connecting Rooms, Anda bisa menghubungkan dua kamar yang bersebelahan dengan pintu di dalamnya. Anda bisa membuka atau menutup pintu sesuai kebutuhan. Connecting Rooms memberikan Anda fleksibilitas, privasi, dan kemudahan dalam berkomunikasi dan berinteraksi dengan orang-orang terdekat Anda. Nikmati fasilitas dan layanan terbaik dari hotel pilihan Anda dengan memesan Connecting Rooms sekarang juga.",
+    label: "Countryside",
+    icon: TbMountain,
+    description: "This property is in the countryside!",
   },
   {
-    label: "Familly Suite",
-    description:
-      "Familly Suite adalah pilihan kamar hotel yang sempurna untuk Anda yang ingin berlibur bersama keluarga besar. Dengan Familly Suite, Anda bisa menikmati dua kamar tidur yang nyaman dengan tempat tidur yang sesuai dengan kebutuhan Anda. Anda juga bisa bersantai di ruang tamu yang luas dengan fasilitas hiburan dan pemandangan indah dari balkon. Kamar mandi kamar ini menyediakan bathtub, shower, dan wastafel ganda untuk memudahkan Anda bersiap-siap. Familly Suite memberikan Anda kesempatan untuk merasakan pengalaman menginap yang berkesan bersama orang-orang tercinta. Pesan Familly Suite sekarang juga dan nikmati fasilitas dan layanan terbaik dari hotel pilihan Anda.",
+    label: "Pools",
+    icon: TbPool,
+    description: "This is property has a beautiful pool!",
   },
   {
-    label: "President Suite",
-    description:
-      "President Suite adalah pilihan kamar hotel yang sempurna untuk Anda yang ingin merasakan pengalaman menginap yang tak terlupakan. Dengan President Suite, Anda bisa menikmati kamar tidur utama yang nyaman dengan tempat tidur ukuran king dan TV LCD. Anda juga bisa bersantai di ruang tamu yang elegan dengan home theatre dan treadmill. Anda bisa menyelenggarakan pesta makan malam dengan menu yang disiapkan oleh tim kuliner hotel di ruang makan yang mewah. Anda bisa memanjakan diri Anda di kamar mandi marmer dengan bathtub, shower, dan wastafel ganda. President Suite memberikan Anda kesempatan untuk merasakan kemewahan dan kenyamanan tingkat tinggi bersama orang-orang tercinta. Pesan President Suite sekarang juga dan nikmati fasilitas dan layanan terbaik dari hotel pilihan Anda.",
+    label: "Islands",
+    icon: GiIsland,
+    description: "This property is on an island!",
+  },
+  {
+    label: "Lake",
+    icon: GiBoatFishing,
+    description: "This property is near a lake!",
+  },
+  {
+    label: "Skiing",
+    icon: FaSkiing,
+    description: "This property has skiing activies!",
+  },
+  {
+    label: "Castles",
+    icon: GiCastle,
+    description: "This property is an ancient castle!",
+  },
+  {
+    label: "Caves",
+    icon: GiCaveEntrance,
+    description: "This property is in a spooky cave!",
+  },
+  {
+    label: "Camping",
+    icon: GiForestCamp,
+    description: "This property offers camping activities!",
+  },
+  {
+    label: "Arctic",
+    icon: BsSnow,
+    description: "This property is in arctic environment!",
+  },
+  {
+    label: "Desert",
+    icon: GiCactus,
+    description: "This property is in the desert!",
+  },
+  {
+    label: "Barns",
+    icon: GiBarn,
+    description: "This property is in a barn!",
+  },
+  {
+    label: "Lux",
+    icon: IoDiamond,
+    description: "This property is brand new and luxurious!",
   },
 ];
 
-const Category = () => {
+const Categories = () => {
   const params = useSearchParams();
   const category = params?.get("category");
   const pathname = usePathname();
   const isMainpage = pathname === "/";
-  return <div>Category</div>;
+
+  if (!isMainpage) {
+    return null;
+  }
+  return (
+    <Container>
+      <div className="flex flex-row justify-between items-center pt-4 overflow-x-auto gap-x-4">
+        {categories.map((item) => (
+          <CategoryBox
+            key={item.label}
+            label={item.label}
+            icon={item.icon}
+            seleted={category === item.label}
+          />
+        ))}
+      </div>
+    </Container>
+  );
 };
 
-export default Category;
+export default Categories;

@@ -14,13 +14,17 @@ import Counter from "../Inputs/Counter";
 import ImageUpload from "../Inputs/ImageUpload";
 import Fasilitas, { facility } from "../Fasilitas";
 import Input from "../Inputs/Input";
+import dynamic from "next/dynamic";
+import CountrySelect from "../city/CountrySelect";
 
 enum STEPS {
   CATEGORY = 0,
-  INFO = 1,
-  IMAGES = 2,
-  FASILITAS = 3,
-  PRICE = 4,
+  LOCATION = 1,
+  INFO = 2,
+  IMAGES = 3,
+  FASILITAS = 4,
+  DESCRIPTION = 5,
+  PRICE = 6,
 }
 
 const RentModal = () => {
@@ -39,13 +43,15 @@ const RentModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       categories: "",
-      guestCount: 1,
-      fullSize: 0,
-      kingSize: 0,
+      adult: 1,
+      kids: 0,
+      children: 0,
       img: [],
       price: 1,
-      rooms: 0,
       fasilitas: [],
+      title: "",
+      description: "",
+      location: null,
     },
   });
 
@@ -102,12 +108,20 @@ const RentModal = () => {
   }, [step]);
 
   const category = watch("category");
-  const guestCount = watch("guestCount");
-  const fullSize = watch("fullSize");
-  const kingSize = watch("kingSize");
-  const rooms = watch("rooms");
+  const adult = watch("adult");
+  const children = watch("children");
+  const kids = watch("kids");
   const img = watch("img");
   const fasilitas = watch("fasilitas");
+  const location = watch("location");
+
+  const Map = useMemo(
+    () =>
+      dynamic(() => import("../Map"), {
+        ssr: false,
+      }),
+    [location]
+  );
 
   let bodyContent = (
     <div className="flex flex-col gap-8">
@@ -125,12 +139,29 @@ const RentModal = () => {
               onClick={(category) => setCustomValue("category", category)}
               selected={category === item.label}
               label={item.label}
+              icon={item.icon}
             />
           </div>
         ))}
       </div>
     </div>
   );
+
+  if (step === STEPS.LOCATION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your place located ? "
+          subtitle="Help guest find you!"
+        />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomValue("location", value)}
+        />
+        <Map center={location?.latlng} />
+      </div>
+    );
+  }
 
   if (step === STEPS.INFO) {
     bodyContent = (
@@ -140,28 +171,22 @@ const RentModal = () => {
           subtitle="Fasilitas utama apa saja yang anda punya"
         />
         <Counter
-          title="Guest"
-          subtitle="Untuk berapa banyak tamu ?"
-          value={guestCount}
-          onChange={(value) => setCustomValue("guestCount", value)}
+          title="Orang dewasa"
+          subtitle="Usia 13 tahun ke atas"
+          value={adult}
+          onChange={(value) => setCustomValue("adult", value)}
         />
         <Counter
-          title="Rooms"
-          subtitle="Kamar no berapa"
-          value={rooms}
-          onChange={(value) => setCustomValue("rooms", value)}
+          title="Anak-anak"
+          subtitle="Umur 2 - 13 tahun"
+          value={kids}
+          onChange={(value) => setCustomValue("kids", value)}
         />
         <Counter
-          title="King size"
-          subtitle="Berapa banyak ranjang kingsize ? "
-          value={kingSize}
-          onChange={(value) => setCustomValue("kingSize", value)}
-        />
-        <Counter
-          title="Full size"
-          subtitle="Berapa banyak ranjang full size ? "
-          value={fullSize}
-          onChange={(value) => setCustomValue("fullSize", value)}
+          title="Balita"
+          subtitle="Umur 2 tahun ke bawah"
+          value={children}
+          onChange={(value) => setCustomValue("children", value)}
         />
       </div>
     );
@@ -204,6 +229,33 @@ const RentModal = () => {
             </div>
           ))}
         </div>
+      </div>
+    );
+  }
+
+  if (step === STEPS.DESCRIPTION) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Sekarang, tetapkan harga Anda"
+          subtitle="Berapa biaya yang Anda kenakan per malam?"
+        />
+        <Input
+          id="title"
+          label="title"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="description"
+          label="description"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
       </div>
     );
   }

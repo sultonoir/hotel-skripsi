@@ -79,7 +79,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                         size={24}
                         className="pr-2"
                       />
-                      Trips
+                      Favorite
                     </button>
                   )}
                 </Menu.Item>

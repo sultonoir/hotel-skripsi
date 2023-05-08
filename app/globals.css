@@ -22,6 +22,13 @@
   display: none;
 }
 
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  z-index: 0 !important;
+}
+
 .rdrMonth {
   width: 100% !important;
 }

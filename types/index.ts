@@ -5,23 +5,13 @@ import {
   Admin,
   Fasilitas,
   Notification,
+  Favorite,
 } from "@prisma/client";
 
 export type SafeListing = Omit<Listing, "createdAt"> & {
   createdAt: string;
   imageSrc: SafeImage[];
   fasilitas: Fasilitas[];
-};
-
-export type SafeListingNotif = Omit<Listing, "createdAt"> & {
-  createdAt: string;
-  imageSrc: SafeImage[];
-  fasilitas: Fasilitas[];
-  user: Pick<User, "id" | "name" | "image"> | null;
-};
-
-export type SafeNotification = Pick<Notification, "id"> & {
-  listing: SafeListingNotif;
 };
 
 export type SafeAdminNotif = Omit<
@@ -31,7 +21,6 @@ export type SafeAdminNotif = Omit<
   createdAt: string;
   updatedAt: string;
   emailVerified: string | null;
-  notification: SafeNotification[] | null;
 };
 
 export type SafeImage = {
@@ -56,6 +45,13 @@ export type SafeReservation = Omit<
   listing: SafeListing;
   user: User | null;
   admin: Admin | null;
+};
+
+export type SafeFav = {
+  id: string;
+  userId: string;
+  listingId: string;
+  listing: Omit<SafeListing, "createdAt">;
 };
 
 export type SafeUser = Omit<

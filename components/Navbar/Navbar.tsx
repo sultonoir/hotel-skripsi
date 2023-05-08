@@ -14,6 +14,7 @@ import AdminMenu from "../admin/AdminMenu";
 import useLoginModal from "../hooks/useLoginModal";
 import { MainNav } from "../main-nav";
 import AdminNavbar from "../admin/AdminNavbar";
+import UserNavbar from "./UserNavbar";
 
 interface NavbarProps {
   currentUser: SafeUser | null;
@@ -30,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser, currentAdmin }) => {
               <Logo />
               <MainNav items={NavItem} />
             </div>
-            {currentUser && <UserMenu currentUser={currentUser} />}
+            {currentUser && <UserNavbar currentUser={currentUser} />}
             {currentAdmin && <AdminNavbar currentAdmin={currentAdmin} />}
             {!currentUser && !currentAdmin && (
               <button

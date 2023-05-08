@@ -13,21 +13,23 @@ interface ListingClientProps {
         description: string;
       }
     | undefined;
-  rooms: number | null;
-  guestCount: number | null;
-  kingSize: number | null;
-  fullSize: number | null;
+  kids: number | null;
+  adult: number | null;
+  children: number | null;
   title: string;
   fasilitas: Fasilitas[];
+  location: string;
+  description: string;
 }
 const ListingInfo: React.FC<ListingClientProps> = ({
-  rooms,
   category,
-  guestCount,
-  kingSize,
-  fullSize,
+  adult,
+  kids,
+  children,
   title,
   fasilitas,
+  location,
+  description,
 }) => {
   return (
     <div className="col-span-4 flex flex-col gap-8">
@@ -36,27 +38,21 @@ const ListingInfo: React.FC<ListingClientProps> = ({
           <Heading title={title} />
         </div>
         <div className="flex flex-row items-center gap-4 font-light text-neutral-500">
-          {rooms !== null && rooms > 0 ? (
-            <div className="flex flex-col md:flex-row gap-2 items-center border-r pr-2 md:pr-4">
-              <BsDoorOpen />
-              {rooms} Kamar
-            </div>
-          ) : null}
-          {kingSize !== null && kingSize > 0 ? (
+          {kids !== null && kids > 0 ? (
             <div className="flex flex-col md:flex-row gap-2 items-center border-r pr-2 md:pr-4">
               <IoBedOutline />
-              {kingSize} King Size
+              {kids} King Size
             </div>
           ) : null}
-          {fullSize !== null && fullSize > 0 ? (
+          {children !== null && children > 0 ? (
             <div className="flex flex-col md:flex-row gap-2 items-center border-r pr-2 md:pr-4">
               <MdOutlineKingBed />
-              {fullSize} Full size
+              {children} Full size
             </div>
           ) : null}
           <div className="flex flex-col md:flex-row gap-2 items-center">
             <BiUser />
-            {guestCount} Tamu
+            {adult} Tamu
           </div>
         </div>
         <hr />

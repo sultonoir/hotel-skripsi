@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import useCountries, { FormatRegional } from "./useRegional";
 import Select from "react-select";
 
-interface CityProps {
+interface CountrySelectProps {
   value?: FormatRegional;
   onChange: (value: FormatRegional) => void;
 }
 
-const City = ({ value, onChange }: CityProps) => {
+const CountrySelect = ({ value, onChange }: CountrySelectProps) => {
   const [countries, setCountries] = useState<FormatRegional[]>([]);
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await useCountries();
@@ -47,4 +46,4 @@ const City = ({ value, onChange }: CityProps) => {
   );
 };
 
-export default City;
+export default CountrySelect;
