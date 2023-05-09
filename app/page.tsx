@@ -1,8 +1,29 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import Container from "@/components/shared/Container";
+import getCurrentUser from "@/components/actions/getCurrentUser";
+import getListings from "@/components/actions/getListings";
+import ListingCard from "@/components/listings/ListingCard";
+import { SafeListing } from "@/types";
 
-const inter = Inter({ subsets: ["latin"] });
+const page = async () => {
+  const currentUser = await getCurrentUser();
+  const listings = await getListings();
+  return (
+    <div className="mt-2">
+      <Container>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+          {listings.map((listing: SafeListing) => {
+            return (
+              <ListingCard
+                currentUser={currentUser}
+                data={listing}
+                key={listing.id}
+              />
+            );
+          })}
+        </div>
+      </Container>
+    </div>
+  );
+};
 
-export default function Home() {
-  return <div className="h-screen">halo</div>;
-}
+export default page;

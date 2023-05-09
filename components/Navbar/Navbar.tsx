@@ -7,12 +7,12 @@ import {
   SafeUser,
   safeAdmin,
 } from "@/types";
-import Container from "../Container";
+import Container from "../shared/Container";
 import Logo from "./Logo";
 import UserMenu from "./UserMenu";
 import AdminMenu from "../admin/AdminMenu";
 import useLoginModal from "../hooks/useLoginModal";
-import { MainNav } from "../main-nav";
+import { MainNav } from "../shared/main-nav";
 import AdminNavbar from "../admin/AdminNavbar";
 import UserNavbar from "./UserNavbar";
 

@@ -22,6 +22,8 @@ export async function POST(request: Request) {
     price,
     img,
     fasilitas,
+    roomCount,
+    bathroomCount,
   } = body;
 
   const { value } = location;
@@ -34,8 +36,11 @@ export async function POST(request: Request) {
       adult,
       kids,
       children,
+      guestCount: kids + adult + children,
       category,
       favorite,
+      roomCount,
+      bathroomCount,
       price: parseInt(price, 10),
       adminId: currentUser.adminId,
       userId: currentUser.id,

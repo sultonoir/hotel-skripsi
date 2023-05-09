@@ -1,9 +1,9 @@
 "use client";
 
-import Button from "../Button";
+import Button from "../shared/Button";
 import { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import ButtonOutline from "../ButtonOutline";
+import ButtonOutline from "../shared/ButtonOutline";
 
 interface ModalProps {
   isOpen?: boolean;

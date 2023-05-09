@@ -1,4 +1,4 @@
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/components/shared/EmptyState";
 import getAdmin from "@/components/actions/getAdmin";
 import getReservations from "@/components/actions/getReservations";
 import ReservationsClient from "./ReservationsClient";

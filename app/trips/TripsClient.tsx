@@ -1,7 +1,7 @@
 "use client";
 
-import Container from "@/components/Container";
-import Heading from "@/components/Heading";
+import Container from "@/components/shared/Container";
+import Heading from "@/components/shared/Heading";
 import ListingCard from "@/components/listings/ListingCard";
 import { SafeReservation, SafeUser } from "@/types";
 import axios from "axios";

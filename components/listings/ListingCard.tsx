@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from "date-fns";
 import HearthButton from "./HearthButton";
-import Button from "../Button";
+import Button from "../shared/Button";
 import {
   SafeImage,
   SafeListing,

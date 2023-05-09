@@ -1,5 +1,5 @@
 import { MdOutlineKingBed } from "react-icons/md";
-import Heading from "../Heading";
+import Heading from "../shared/Heading";
 import { IoBedOutline } from "react-icons/io5";
 import { BiUser } from "react-icons/bi";
 import { BsDoorOpen } from "react-icons/bs";

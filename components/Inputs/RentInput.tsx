@@ -1,7 +1,7 @@
 "use client";
 
 import useRentModal from "../hooks/useRentModal";
-import Heading from "../Heading";
+import Heading from "../shared/Heading";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const RentInput = () => {

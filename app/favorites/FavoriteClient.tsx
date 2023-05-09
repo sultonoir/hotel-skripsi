@@ -1,6 +1,6 @@
 "use client";
 
-import Container from "@/components/Container";
+import Container from "@/components/shared/Container";
 import ListingCard from "@/components/listings/ListingCard";
 import { SafeUser, SafeFav, SafeListing } from "@/types";
 

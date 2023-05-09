@@ -1,7 +1,7 @@
 "use client";
 
 import { safeAdmin } from "@/types";
-import AvatarCom from "../AvatarCom";
+import AvatarCom from "../shared/AvatarCom";
 import useAdminModal from "../hooks/useAdminModal";
 import { Menu, Transition } from "@headlessui/react";
 import { signOut } from "next-auth/react";

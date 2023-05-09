@@ -1,6 +1,6 @@
 "use client";
 
-import Heading from "../Heading";
+import Heading from "../shared/Heading";
 import Input from "../Inputs/Input";
 import useAdminModal from "../hooks/useAdminModal";
 import Modal from "./Modal";

@@ -46,7 +46,7 @@ const Button = ({
         {disabled && (
           <BiLoaderAlt
             size={24}
-            className="mr-2 animate-spin"
+            className="animate-spin"
           />
         )}
         {Icon && (

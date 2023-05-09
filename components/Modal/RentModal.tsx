@@ -7,12 +7,12 @@ import { useState, useMemo } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { categories } from "../Category";
-import Heading from "../Heading";
+import { categories } from "../shared/Category";
+import Heading from "../shared/Heading";
 import CategoryInput from "../Inputs/CategoryInput";
 import Counter from "../Inputs/Counter";
 import ImageUpload from "../Inputs/ImageUpload";
-import Fasilitas, { facility } from "../Fasilitas";
+import Fasilitas, { facility } from "../shared/Fasilitas";
 import Input from "../Inputs/Input";
 import dynamic from "next/dynamic";
 import CountrySelect from "../city/CountrySelect";
@@ -52,6 +52,9 @@ const RentModal = () => {
       title: "",
       description: "",
       location: null,
+      roomCount: 1,
+      bathroomCount: 1,
+      guestCount: 0,
     },
   });
 
@@ -114,10 +117,12 @@ const RentModal = () => {
   const img = watch("img");
   const fasilitas = watch("fasilitas");
   const location = watch("location");
+  const roomCount = watch("roomCount");
+  const bathroomCount = watch("bathroomCount");
 
   const Map = useMemo(
     () =>
-      dynamic(() => import("../Map"), {
+      dynamic(() => import("../shared/Map"), {
         ssr: false,
       }),
     [location]
@@ -187,6 +192,18 @@ const RentModal = () => {
           subtitle="Umur 2 tahun ke bawah"
           value={children}
           onChange={(value) => setCustomValue("children", value)}
+        />
+        <Counter
+          title="kamar"
+          subtitle="Berapa banyak kamar yang anda miliki"
+          value={roomCount}
+          onChange={(value) => setCustomValue("roomCount", value)}
+        />
+        <Counter
+          title="kamar mandi"
+          subtitle="Berapa banyak kamar mandi yang anda miliki"
+          value={bathroomCount}
+          onChange={(value) => setCustomValue("bathroomCount", value)}
         />
       </div>
     );

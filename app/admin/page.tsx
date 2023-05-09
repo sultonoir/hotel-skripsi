@@ -1,5 +1,5 @@
-import Container from "@/components/Container";
-import EmptyState from "@/components/EmptyState";
+import Container from "@/components/shared/Container";
+import EmptyState from "@/components/shared/EmptyState";
 import RentInput from "@/components/Inputs/RentInput";
 import getAdmin from "@/components/actions/getAdmin";
 import getCurrentUser from "@/components/actions/getCurrentUser";

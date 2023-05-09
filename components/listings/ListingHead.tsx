@@ -2,7 +2,7 @@
 
 import { SafeImage, SafeListing, SafeUser } from "@/types";
 import Image from "next/image";
-import Heading from "../Heading";
+import Heading from "../shared/Heading";
 import HearthButton from "./HearthButton";
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";

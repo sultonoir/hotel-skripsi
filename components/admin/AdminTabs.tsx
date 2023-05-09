@@ -14,9 +14,7 @@ const AdminTabs: React.FC<AdminTabsProps> = ({ listings }) => {
         <TabsTrigger value="Properties">Properties</TabsTrigger>
       </TabsList>
       <TabsContent value="Reservation"></TabsContent>
-      <TabsContent value="Properties">
-        <RentInput listings={listings} />
-      </TabsContent>
+      <TabsContent value="Properties"></TabsContent>
     </Tabs>
   );
 };

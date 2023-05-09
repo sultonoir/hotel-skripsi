@@ -1,4 +1,4 @@
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/components/shared/EmptyState";
 import getCurrentUser from "@/components/actions/getCurrentUser";
 import getLIstingById from "@/components/actions/getListingById";
 import getReservations from "@/components/actions/getReservations";

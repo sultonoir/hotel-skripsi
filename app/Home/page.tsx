@@ -1,9 +1,8 @@
-import Container from "@/components/Container";
-import RentInput from "@/components/Inputs/RentInput";
+import Container from "@/components/shared/Container";
 import getCurrentUser from "@/components/actions/getCurrentUser";
 import getListings from "@/components/actions/getListings";
 import ListingCard from "@/components/listings/ListingCard";
-import { SafeListing, SafeUser } from "@/types";
+import { SafeListing } from "@/types";
 
 const page = async () => {
   const currentUser = await getCurrentUser();

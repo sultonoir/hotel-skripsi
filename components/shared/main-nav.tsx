@@ -1,5 +1,5 @@
 import { NavItem } from "@/types";
-import Logo from "./Navbar/Logo";
+import Logo from "../Navbar/Logo";
 import Link from "next/link";
 
 interface MainNavProps {

@@ -1,6 +1,6 @@
 "use client";
-import { categories } from "@/components/Category";
-import Container from "@/components/Container";
+import { categories } from "@/components/shared/Category";
+import Container from "@/components/shared/Container";
 import useLoginModal from "@/components/hooks/useLoginModal";
 import ListingHead from "@/components/listings/ListingHead";
 import ListingInfo from "@/components/listings/ListingInfo";

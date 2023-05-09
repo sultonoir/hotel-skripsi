@@ -1,4 +1,4 @@
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/components/shared/EmptyState";
 import getCurrentUser from "@/components/actions/getCurrentUser";
 import getFavorites from "@/components/actions/getFavorites";
 import FavoritesClient from "./FavoriteClient";

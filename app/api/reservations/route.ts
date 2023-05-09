@@ -30,6 +30,8 @@ export async function POST(request: Request) {
             startDate: new Date(startDate),
             endDate: new Date(endDate),
             totalPrice: totalPrice,
+            status: status,
+            adminId: currentUser.adminId,
           },
         },
         notification: {

@@ -1,8 +1,8 @@
 "use client";
 
 import { toast } from "react-hot-toast";
-import Button from "../Button";
-import Heading from "../Heading";
+import Button from "../shared/Button";
+import Heading from "../shared/Heading";
 import Input from "../Inputs/Input";
 import useLoginModal from "../hooks/useLoginModal";
 import useRegisterModal from "../hooks/useRegisterModal";

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { facility } from "../Fasilitas";
+import { facility } from "../shared/Fasilitas";
 import Fas from "./Fas";
 
 interface FacilityProps {
