@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { format } from "date-fns";
 import HearthButton from "./HearthButton";
@@ -8,11 +7,11 @@ import Button from "../shared/Button";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import { SafeListing, SafeReservation, SafeUser, safeAdmin } from "@/types";
 import Link from "next/link";
 import BluredImage from "../shared/BluredImage";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import { GrLocation } from "react-icons/gr";
 
 interface ListingCardProps {
   data: SafeListing;
@@ -36,7 +35,6 @@ const ListingCard: React.FC<ListingCardProps> = ({
   currentUser,
   name,
 }) => {
-  const router = useRouter();
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
@@ -51,11 +49,18 @@ const ListingCard: React.FC<ListingCardProps> = ({
   );
 
   const price = useMemo(() => {
+    const formatter = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    });
+
     if (reservation) {
-      return reservation.totalPrice;
+      const formattedPrice = formatter.format(reservation.totalPrice);
+      return formattedPrice;
     }
 
-    return data.price;
+    const formattedPrice = formatter.format(data.price);
+    return formattedPrice;
   }, [reservation, data.price]);
 
   const reservationDate = useMemo(() => {
@@ -118,12 +123,16 @@ const ListingCard: React.FC<ListingCardProps> = ({
           </div>
 
           <div className="font-semibold text-foreground">{data.title}</div>
+          <div className="flex gap-4 font-light text-neutral-500 items-center">
+            <GrLocation color="#737373" />
+            {data.location}
+          </div>
 
           <div className="font-light text-neutral-500">
             {reservationDate || data.category}
           </div>
           <div className="flex flex-row items-center gap-1">
-            <div className="font-semibold">idr {price}</div>
+            <div className="font-semibold">{price}</div>
             {!reservation && <div className="font-light">night</div>}
           </div>
           {onAction && actionLabel && (

@@ -20,7 +20,7 @@ export default function BluredImage({ src, alt }: BluredImageProps) {
         sizes="100%"
         style={{ objectFit: "cover" }}
         className={`
-              duration-700 ease-in-out group-hover:opacity-75
+              duration-700 ease-in-out group-hover:scale-110
               ${
                 isLoading
                   ? "scale-110 blur-2xl grayscale"

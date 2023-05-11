@@ -15,7 +15,11 @@ export default async function getLIstingById(params: Iparams) {
         admin: true,
         imageSrc: true,
         fasilitas: true,
-        user: true,
+        user: {
+          include: {
+            favorite: true,
+          },
+        },
       },
     });
 
@@ -32,6 +36,14 @@ export default async function getLIstingById(params: Iparams) {
             createdAt: listing.admin.createdAt.toISOString(),
             updatedAt: listing.admin.updatedAt.toISOString(),
             emailVerified: listing.admin.emailVerified?.toISOString() || null,
+          }
+        : null,
+      user: listing.user
+        ? {
+            ...listing.user,
+            createdAt: listing.user.createdAt.toISOString(),
+            updatedAt: listing.user.updatedAt.toISOString(),
+            emailVerified: listing.user.emailVerified?.toISOString() || null,
           }
         : null,
     };

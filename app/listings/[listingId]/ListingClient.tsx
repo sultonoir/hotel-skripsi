@@ -23,12 +23,14 @@ interface ListingClientProps {
   listing: SafeListing;
   currentUser: SafeUser | null;
   reservations: SafeReservation[];
+  user: SafeUser | null;
 }
 
 const ListingClient: React.FC<ListingClientProps> = ({
   listing,
   currentUser,
   reservations,
+  user,
 }) => {
   const loginModal = useLoginModal();
   const router = useRouter();
@@ -109,11 +111,12 @@ const ListingClient: React.FC<ListingClientProps> = ({
               location={listing.location}
               description={listing.description}
               category={category}
-              adult={listing.adult}
-              kids={listing.kids}
-              children={listing.children}
               title={listing.title}
               fasilitas={listing.fasilitas}
+              user={user}
+              guestCount={listing.guestCount}
+              bathroomCount={listing.bathroomCount}
+              roomCount={listing.roomCount}
             />
             <div
               className="

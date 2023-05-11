@@ -22,6 +22,7 @@ const page = async ({ params }: { params: Iparams }) => {
       listing={listing}
       currentUser={currentUser}
       reservations={reservations}
+      user={listing.user}
     />
   );
 };
