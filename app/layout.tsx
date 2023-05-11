@@ -4,7 +4,6 @@ import LoginModal from "@/components/Modal/LoginModal";
 import RegisterModal from "@/components/Modal/RegisterModal";
 import getCurrentUser from "../components/actions/getCurrentUser";
 import ToasterProvider from "@/providers/ToasterProvider";
-import AdminModal from "@/components/Modal/AdminModal";
 import Navbar from "@/components/Navbar/Navbar";
 import RentModal from "@/components/Modal/RentModal";
 import getAdmin from "@/components/actions/getAdmin";
@@ -32,7 +31,6 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
           currentUser={currentUser}
           currentAdmin={currentAdmin}
         />
-        <AdminModal />
         <LoginModal />
         <RegisterModal />
         <RentModal />

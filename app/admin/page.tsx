@@ -4,7 +4,6 @@ import RentInput from "@/components/Inputs/RentInput";
 import getAdmin from "@/components/actions/getAdmin";
 import getCurrentUser from "@/components/actions/getCurrentUser";
 import getListings from "@/components/actions/getListings";
-import ListingCard from "@/components/listings/ListingCard";
 import AdminClient from "./AdminClient";
 
 const page = async () => {

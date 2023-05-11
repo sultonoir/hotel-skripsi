@@ -66,7 +66,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
               <TbPhotoPlus size={50} />
               <div className="font-semibold text-lg">Click to upload</div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
               {value.map((url) => (
                 <Image
                   width={200}

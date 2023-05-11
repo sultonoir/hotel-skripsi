@@ -16,6 +16,7 @@ import Fasilitas, { facility } from "../shared/Fasilitas";
 import Input from "../Inputs/Input";
 import dynamic from "next/dynamic";
 import CountrySelect from "../city/CountrySelect";
+import InputIdr from "../Inputs/InputIdr";
 
 enum STEPS {
   CATEGORY = 0,
@@ -80,8 +81,8 @@ const RentModal = () => {
         setStep(STEPS.CATEGORY);
         rentModal.onClose();
       })
-      .catch(() => {
-        toast.error("Something went wrong");
+      .catch((error: any) => {
+        toast.error(error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -284,10 +285,9 @@ const RentModal = () => {
           title="Sekarang, tetapkan harga Anda"
           subtitle="Berapa biaya yang Anda kenakan per malam?"
         />
-        <Input
+        <InputIdr
           id="price"
           label="Price"
-          formatPrice
           type="number"
           disabled={isLoading}
           register={register}

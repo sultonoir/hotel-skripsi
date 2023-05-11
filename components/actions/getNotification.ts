@@ -27,10 +27,9 @@ export default async function getNotification() {
           include: {
             imageSrc: true,
             fasilitas: true,
+            user: true,
           },
         },
-        admin: true,
-        user: true,
       },
     });
 

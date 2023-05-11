@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import BluredImage from "../shared/BluredImage";
 
 interface ListingHeadProps {
   title: string;
@@ -24,10 +25,6 @@ const ListingHead: React.FC<ListingHeadProps> = ({
   id,
   currentUser,
 }) => {
-  function cn(...classes: string[]) {
-    return classes.filter(Boolean).join(" ");
-  }
-  const [isLoading, setLoading] = useState(true);
   return (
     <>
       <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
@@ -51,20 +48,9 @@ const ListingHead: React.FC<ListingHeadProps> = ({
           {imageSrc.map((img) => {
             return (
               <SwiperSlide key={img.id}>
-                <Image
-                  alt="image"
-                  fill
-                  priority
-                  sizes="100vw"
+                <BluredImage
                   src={img.img}
-                  key={img.id}
-                  className={cn(
-                    "duration-700 ease-in-out",
-                    isLoading
-                      ? "grayscale blur-2xl scale-110"
-                      : "grayscale-0 blur-0 scale-100"
-                  )}
-                  onLoadingComplete={() => setLoading(false)}
+                  alt={title}
                 />
               </SwiperSlide>
             );

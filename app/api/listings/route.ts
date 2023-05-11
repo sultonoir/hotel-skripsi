@@ -26,6 +26,10 @@ export async function POST(request: Request) {
     bathroomCount,
   } = body;
 
+  if (!category) {
+    return "tidak ada kategory";
+  }
+
   const { value } = location;
 
   const listing = await prisma.listing.create({

@@ -1,16 +1,8 @@
 "use client";
 
-import {
-  NavItem,
-  SafeAdminNotif,
-  SafeListing,
-  SafeUser,
-  safeAdmin,
-} from "@/types";
+import { NavItem, SafeUser, safeAdmin } from "@/types";
 import Container from "../shared/Container";
 import Logo from "./Logo";
-import UserMenu from "./UserMenu";
-import AdminMenu from "../admin/AdminMenu";
 import useLoginModal from "../hooks/useLoginModal";
 import { MainNav } from "../shared/main-nav";
 import AdminNavbar from "../admin/AdminNavbar";

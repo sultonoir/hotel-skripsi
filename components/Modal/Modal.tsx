@@ -90,7 +90,6 @@ const Modal: React.FC<ModalProps> = ({
           relative 
           w-full
           max-w-sm
-          
           mx-auto 
           h-screen
           lg:h-auto
@@ -111,7 +110,6 @@ const Modal: React.FC<ModalProps> = ({
             <div
               className="
               translate
-              h-full
               lg:h-auto
               md:h-auto
               border-0 
@@ -181,7 +179,17 @@ const Modal: React.FC<ModalProps> = ({
                     onClick={handleSubmit}
                   />
                 </div>
-                <div className="mt-2">{footer}</div>
+
+                <div className="mt-2 flex flex-col">
+                  {footer && (
+                    <div className="flex justify-center items-center">
+                      <div className="border-t border-gray-400 w-1/3"></div>
+                      <div className="mx-3">or</div>
+                      <div className="border-t border-gray-400 w-1/3"></div>
+                    </div>
+                  )}
+                  {footer}
+                </div>
               </div>
             </div>
           </div>
